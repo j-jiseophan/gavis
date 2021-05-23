@@ -1,5 +1,7 @@
 # Gavis
 
+[![npm version](https://badge.fury.io/js/gavis.svg)](https://badge.fury.io/js/gavis)
+
 Declarative logging library for React
 
 ## Installation
@@ -36,7 +38,8 @@ function App() {
 /*
   - Create a log event context with <Gavis/> .
   - If 'logOnMount' is true, event 
-    {cateogry: "News", action:"expose", label:"morning", data: { viewCount, commentCount }} is sent on mount
+    {cateogry: "News", action:"expose", label:"morning", 
+      data: { viewCount, commentCount }} is sent on mount
 */
 
 function Page() {
@@ -63,7 +66,8 @@ function Page() {
 /*
   - The event context can be overriden 
     by child <Gavis/> or 'log' function
-  - Event {cateogry: "News", action:"click", label:"evening", data: { viewCount, commentCount }} is sent on click
+  - Event {cateogry: "News", action:"click", label:"evening", 
+            data: { viewCount, commentCount }} is sent on click
 */
 
 function Button() {
