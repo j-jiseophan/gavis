@@ -1,9 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 
-import { Gavis } from "../lib/Gavis";
-import { GavisConfig } from "../lib/GavisConfig";
-import useGavis from "../lib/useGavis";
+import { Gavis, GavisConfig, useGavis } from "../lib";
 
 describe("useGavis", () => {
   const event = {

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo } from "react";
 import { GavisContext } from "./context";
 import { GavisProps, GavisEvent } from "./types";
 
-export const Gavis = ({
+const Gavis = ({
   category,
   action,
   label,
@@ -41,3 +41,5 @@ export const Gavis = ({
     </GavisContext.Provider>
   );
 };
+
+export default Gavis;

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React, { useContext } from "react";
 
 import { GavisContext } from "../lib/context";
-import { GavisConfig } from "../lib/GavisConfig";
+import GavisConfig from "../lib/GavisConfig";
 
 describe("GavisConfig", () => {
   it("should be initialized with logger", async () => {

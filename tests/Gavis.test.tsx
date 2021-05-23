@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
 
-import { Gavis } from "../lib/Gavis";
-import { GavisConfig } from "../lib/GavisConfig";
+import { Gavis, GavisConfig } from "../lib";
 
 describe("Gavis", () => {
   const event = {
