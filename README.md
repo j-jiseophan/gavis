@@ -20,6 +20,9 @@ yarn add gavis
 
 ```tsx
 //App.tsx
+
+import { GavisConfig } from "gavis";
+
 const logger = (category: string, action: string, label: string, data: any) => {
   const value = data.viewCount;
   ga(category, action, label, value);
@@ -35,10 +38,12 @@ function App() {
 
 //Page.tsx
 
+import { Gavis } from "gavis";
+
 /*
   - Create a log event context with <Gavis/> .
-  - If 'logOnMount' is true, event 
-    {cateogry: "News", action:"expose", label:"morning", 
+  - If 'logOnMount' is true, event
+    {cateogry: "News", action:"expose", label:"morning",
       data: { viewCount, commentCount }} is sent on mount
 */
 
@@ -63,10 +68,12 @@ function Page() {
 
 // Button.tsx
 
+import { useGavis } from "gavis";
+
 /*
-  - The event context can be overriden 
+  - The event context can be overriden
     by child <Gavis/> or 'log' function
-  - Event {cateogry: "News", action:"click", label:"evening", 
+  - Event {cateogry: "News", action:"click", label:"evening",
             data: { viewCount, commentCount }} is sent on click
 */
 
