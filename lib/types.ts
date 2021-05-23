@@ -11,15 +11,15 @@ export interface GavisProps {
   action?: string;
   label?: string;
   data?: any;
-  sendClick?: boolean;
   sendMount?: boolean;
 }
 
-type Sender = (event: GavisEvent) => void;
+export type Sender = (event: GavisEvent) => void;
+export type Send = (event: Partial<GavisEvent>) => void;
 
 export interface GavisContextValue {
   sender: Sender;
-  event?: Partial<GavisEvent>;
+  event: Partial<GavisEvent>;
 }
 
 export interface GavisConfigProps {

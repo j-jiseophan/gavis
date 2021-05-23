@@ -8,20 +8,24 @@ export const Gavis = ({
   label,
   data,
   children,
+  sendMount,
 }: GavisProps): JSX.Element => {
   const { sender, event } = useContext(GavisContext);
 
   const shadowedEvent = useMemo(
     () => ({
-      category: category ?? event?.category,
-      action: action ?? event?.action,
-      label: label ?? event?.label,
-      data: data ?? event?.data,
+      category: category ?? event.category,
+      action: action ?? event.action,
+      label: label ?? event.label,
+      data: data ?? event.data,
     }),
     [category, action, label, data, event]
   );
 
   useEffect(() => {
+    if (!sendMount) {
+      return;
+    }
     if (shadowedEvent.category === undefined) {
       throw "category is not defined";
     }
@@ -29,7 +33,7 @@ export const Gavis = ({
       throw "action is not defined";
     }
     sender(shadowedEvent as GavisEvent);
-  }, [shadowedEvent, sender]);
+  }, [shadowedEvent, sender, sendMount]);
 
   return (
     <GavisContext.Provider value={{ sender, event: shadowedEvent }}>

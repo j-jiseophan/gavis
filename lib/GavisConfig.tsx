@@ -8,6 +8,8 @@ export const GavisConfig = ({
   sender,
 }: GavisConfigProps): JSX.Element => {
   return (
-    <GavisContext.Provider value={{ sender }}>{children}</GavisContext.Provider>
+    <GavisContext.Provider value={{ sender, event: {} }}>
+      {children}
+    </GavisContext.Provider>
   );
 };

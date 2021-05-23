@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 
 import { Gavis } from "../lib/Gavis";
@@ -14,7 +14,7 @@ describe("Gavis", () => {
 
     function Page() {
       return (
-        <Gavis category={event.category} action={event.action}>
+        <Gavis category={event.category} action={event.action} sendMount>
           <div>message</div>
         </Gavis>
       );
@@ -38,7 +38,7 @@ describe("Gavis", () => {
     function Page() {
       return (
         <Gavis category={event.category} action={event.action}>
-          <Gavis category="c2">
+          <Gavis category="c2" sendMount>
             <div>message</div>
           </Gavis>
         </Gavis>
