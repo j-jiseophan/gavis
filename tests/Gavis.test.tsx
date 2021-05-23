@@ -30,6 +30,7 @@ describe("Gavis", () => {
     await screen.findByText("message");
 
     expect(senderFunction).toBeCalledWith(event);
+    expect(senderFunction).toBeCalledTimes(1);
   });
 
   it("should send shadowed event", async () => {
@@ -55,5 +56,6 @@ describe("Gavis", () => {
     await screen.findByText("message");
 
     expect(senderFunction).toBeCalledWith({ category: "c2", action: "a" });
+    expect(senderFunction).toBeCalledTimes(1);
   });
 });

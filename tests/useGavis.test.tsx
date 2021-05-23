@@ -33,6 +33,7 @@ describe("useGavis", () => {
 
     fireEvent.click(screen.getByText("message"));
 
+    expect(senderFunction).toBeCalledTimes(1);
     expect(senderFunction).toBeCalledWith(event);
   });
 });
