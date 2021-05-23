@@ -31,4 +31,29 @@ describe("Gavis", () => {
 
     expect(senderFunction).toBeCalledWith(event);
   });
+
+  it("should send shadowed event", async () => {
+    const senderFunction = jest.fn();
+
+    function Page() {
+      return (
+        <Gavis category={event.category} action={event.action}>
+          <Gavis category="c2">
+            <div>message</div>
+          </Gavis>
+        </Gavis>
+      );
+    }
+
+    render(
+      <GavisConfig sender={senderFunction}>
+        <Page />
+      </GavisConfig>
+    );
+
+    // mount
+    await screen.findByText("message");
+
+    expect(senderFunction).toBeCalledWith({ category: "c2", action: "a" });
+  });
 });
