@@ -5,10 +5,10 @@ import { GavisConfigProps } from "./types";
 
 export const GavisConfig = ({
   children,
-  sender,
+  logger,
 }: GavisConfigProps): JSX.Element => {
   return (
-    <GavisContext.Provider value={{ sender, event: {} }}>
+    <GavisContext.Provider value={{ logger, event: {} }}>
       {children}
     </GavisContext.Provider>
   );

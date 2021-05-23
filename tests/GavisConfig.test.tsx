@@ -5,29 +5,29 @@ import { GavisContext } from "../lib/context";
 import { GavisConfig } from "../lib/GavisConfig";
 
 describe("GavisConfig", () => {
-  it("should be initialized with sender", async () => {
-    const senderFunction = jest.fn();
+  it("should be initialized with logger", async () => {
+    const loggerFunction = jest.fn();
 
     function Page() {
-      const { sender } = useContext(GavisContext);
+      const { logger: _logger } = useContext(GavisContext);
 
       return (
-        <button onClick={() => sender({ category: "", action: "" })}>
-          send
+        <button onClick={() => _logger({ category: "", action: "" })}>
+          log
         </button>
       );
     }
 
     render(
-      <GavisConfig sender={senderFunction}>
+      <GavisConfig logger={loggerFunction}>
         <Page />
       </GavisConfig>
     );
 
     // mount
-    await screen.findByText("send");
+    await screen.findByText("log");
 
-    fireEvent.click(screen.getByText("send"));
-    expect(senderFunction).toBeCalledTimes(1);
+    fireEvent.click(screen.getByText("log"));
+    expect(loggerFunction).toBeCalledTimes(1);
   });
 });

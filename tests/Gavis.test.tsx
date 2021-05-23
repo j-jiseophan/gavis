@@ -9,19 +9,19 @@ describe("Gavis", () => {
     category: "c",
     action: "a",
   };
-  it("should send mount event", async () => {
-    const senderFunction = jest.fn();
+  it("should log mount event", async () => {
+    const logger = jest.fn();
 
     function Page() {
       return (
-        <Gavis category={event.category} action={event.action} sendMount>
+        <Gavis category={event.category} action={event.action} logOnMount>
           <div>message</div>
         </Gavis>
       );
     }
 
     render(
-      <GavisConfig sender={senderFunction}>
+      <GavisConfig logger={logger}>
         <Page />
       </GavisConfig>
     );
@@ -29,17 +29,17 @@ describe("Gavis", () => {
     // mount
     await screen.findByText("message");
 
-    expect(senderFunction).toBeCalledWith(event);
-    expect(senderFunction).toBeCalledTimes(1);
+    expect(logger).toBeCalledWith(event);
+    expect(logger).toBeCalledTimes(1);
   });
 
-  it("should send shadowed event", async () => {
-    const senderFunction = jest.fn();
+  it("should log shadowed event", async () => {
+    const logger = jest.fn();
 
     function Page() {
       return (
         <Gavis category={event.category} action={event.action}>
-          <Gavis category="c2" sendMount>
+          <Gavis category="c2" logOnMount>
             <div>message</div>
           </Gavis>
         </Gavis>
@@ -47,7 +47,7 @@ describe("Gavis", () => {
     }
 
     render(
-      <GavisConfig sender={senderFunction}>
+      <GavisConfig logger={logger}>
         <Page />
       </GavisConfig>
     );
@@ -55,7 +55,7 @@ describe("Gavis", () => {
     // mount
     await screen.findByText("message");
 
-    expect(senderFunction).toBeCalledWith({ category: "c2", action: "a" });
-    expect(senderFunction).toBeCalledTimes(1);
+    expect(logger).toBeCalledWith({ category: "c2", action: "a" });
+    expect(logger).toBeCalledTimes(1);
   });
 });

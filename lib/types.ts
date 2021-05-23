@@ -11,18 +11,18 @@ export interface GavisProps {
   action?: string;
   label?: string;
   data?: any;
-  sendMount?: boolean;
+  logOnMount?: boolean;
 }
 
-export type Sender = (event: GavisEvent) => void;
-export type Send = (event: Partial<GavisEvent>) => void;
+export type Logger = (event: GavisEvent) => void;
+export type Log = (event: Partial<GavisEvent>) => void;
 
 export interface GavisContextValue {
-  sender: Sender;
+  logger: Logger;
   event: Partial<GavisEvent>;
 }
 
 export interface GavisConfigProps {
   children?: JSX.Element | JSX.Element[];
-  sender: Sender;
+  logger: Logger;
 }

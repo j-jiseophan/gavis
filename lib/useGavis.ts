@@ -1,11 +1,11 @@
 import { useCallback, useContext } from "react";
 import { GavisContext } from "./context";
-import { GavisEvent, Send } from "./types";
+import { GavisEvent, Log } from "./types";
 
-const useGavis = (): Send => {
-  const { sender, event } = useContext(GavisContext);
+const useGavis = (): Log => {
+  const { logger, event } = useContext(GavisContext);
 
-  const send = useCallback(
+  const log = useCallback(
     ({ category, action, label, data }: Partial<GavisEvent>) => {
       const shadowedEvent = {
         category: category ?? event.category,
@@ -20,12 +20,12 @@ const useGavis = (): Send => {
       if (shadowedEvent.action === undefined) {
         throw "action is not defined";
       }
-      sender(event as GavisEvent);
+      logger(event as GavisEvent);
     },
-    [event, sender]
+    [event, logger]
   );
 
-  return send;
+  return log;
 };
 
 export default useGavis;

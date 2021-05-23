@@ -8,9 +8,9 @@ export const Gavis = ({
   label,
   data,
   children,
-  sendMount,
+  logOnMount,
 }: GavisProps): JSX.Element => {
-  const { sender, event } = useContext(GavisContext);
+  const { logger, event } = useContext(GavisContext);
 
   const shadowedEvent = useMemo(
     () => ({
@@ -23,7 +23,7 @@ export const Gavis = ({
   );
 
   useEffect(() => {
-    if (!sendMount) {
+    if (!logOnMount) {
       return;
     }
     if (shadowedEvent.category === undefined) {
@@ -32,11 +32,11 @@ export const Gavis = ({
     if (shadowedEvent.action === undefined) {
       throw "action is not defined";
     }
-    sender(shadowedEvent as GavisEvent);
-  }, [shadowedEvent, sender, sendMount]);
+    logger(shadowedEvent as GavisEvent);
+  }, [shadowedEvent, logger, logOnMount]);
 
   return (
-    <GavisContext.Provider value={{ sender, event: shadowedEvent }}>
+    <GavisContext.Provider value={{ logger, event: shadowedEvent }}>
       {children}
     </GavisContext.Provider>
   );

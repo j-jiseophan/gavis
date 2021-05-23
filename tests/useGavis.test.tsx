@@ -11,17 +11,17 @@ describe("useGavis", () => {
     action: "a",
   };
 
-  it("should send event on click", async () => {
-    const senderFunction = jest.fn();
+  it("should log event on click", async () => {
+    const loggerFunction = jest.fn();
 
     function Page() {
-      const send = useGavis();
+      const log = useGavis();
 
-      return <button onClick={() => send({})}>message</button>;
+      return <button onClick={() => log({})}>message</button>;
     }
 
     render(
-      <GavisConfig sender={senderFunction}>
+      <GavisConfig logger={loggerFunction}>
         <Gavis category={event.category} action={event.action}>
           <Page />
         </Gavis>
@@ -33,7 +33,7 @@ describe("useGavis", () => {
 
     fireEvent.click(screen.getByText("message"));
 
-    expect(senderFunction).toBeCalledTimes(1);
-    expect(senderFunction).toBeCalledWith(event);
+    expect(loggerFunction).toBeCalledTimes(1);
+    expect(loggerFunction).toBeCalledWith(event);
   });
 });
