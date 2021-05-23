@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "yarn  build && yarn publish"
   },
   "author": "Jiseop Han <jshan2017@gmail.com>",
   "license": "MIT",
