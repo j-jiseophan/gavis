@@ -20,7 +20,7 @@ const useGavis = (): Log => {
       if (shadowedEvent.action === undefined) {
         throw "action is not defined";
       }
-      logger(event as GavisEvent);
+      logger(shadowedEvent as GavisEvent);
     },
     [event, logger]
   );
