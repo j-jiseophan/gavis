@@ -5,6 +5,13 @@ export interface GavisEvent {
   data?: DataObject;
 }
 
+export interface LogEvent {
+  category?: string;
+  action?: string;
+  label?: string;
+  data?: Data;
+}
+
 export interface GavisProps {
   children: JSX.Element | JSX.Element[];
   category?: string;
@@ -15,7 +22,7 @@ export interface GavisProps {
 }
 
 export type Logger = (event: GavisEvent) => void;
-export type Log = (event: Partial<GavisEvent>) => void;
+export type Log = (event: LogEvent) => void;
 
 export type DataObject = Record<string, unknown>;
 export type DataModifier = (data: DataObject) => DataObject;
