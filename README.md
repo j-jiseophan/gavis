@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/gavis.svg)](https://badge.fury.io/js/gavis)
 
-Declarative logging library for React
+Declarative analytics logging library for React
 
 ## Installation
 
