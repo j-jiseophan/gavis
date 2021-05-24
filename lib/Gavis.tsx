@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import { GavisContext } from "./context";
-import { GavisProps, GavisEvent, DataObject } from "./types";
+import { GavisProps, GavisEvent } from "./types";
 
 const Gavis = ({
   category,
