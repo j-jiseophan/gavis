@@ -2,7 +2,7 @@ export interface GavisEvent {
   category: string;
   action: string;
   label?: string;
-  data?: any;
+  data?: DataObject;
 }
 
 export interface GavisProps {
@@ -10,13 +10,16 @@ export interface GavisProps {
   category?: string;
   action?: string;
   label?: string;
-  data?: any;
+  data?: Data;
   logOnMount?: boolean;
 }
 
 export type Logger = (event: GavisEvent) => void;
 export type Log = (event: Partial<GavisEvent>) => void;
 
+export type DataObject = Record<string, unknown>;
+export type DataModifier = (data: DataObject) => DataObject;
+export type Data = DataObject | DataModifier;
 export interface GavisContextValue {
   logger: Logger;
   event: Partial<GavisEvent>;

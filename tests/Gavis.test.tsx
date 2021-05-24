@@ -57,4 +57,76 @@ describe("Gavis", () => {
     expect(logger).toBeCalledWith({ category: "c2", action: "a" });
     expect(logger).toBeCalledTimes(1);
   });
+
+  it("should replace data field", async () => {
+    const logger = jest.fn();
+
+    function Page() {
+      return (
+        <Gavis
+          category={event.category}
+          action={event.action}
+          data={{ name: "han" }}
+        >
+          <Gavis category="c2" logOnMount data={{ lang: "ko" }}>
+            <div>message</div>
+          </Gavis>
+        </Gavis>
+      );
+    }
+
+    render(
+      <GavisConfig logger={logger}>
+        <Page />
+      </GavisConfig>
+    );
+
+    // mount
+    await screen.findByText("message");
+
+    expect(logger).toBeCalledWith({
+      category: "c2",
+      action: "a",
+      data: { lang: "ko" },
+    });
+    expect(logger).toBeCalledTimes(1);
+  });
+
+  it("should modify data field", async () => {
+    const logger = jest.fn();
+
+    function Page() {
+      return (
+        <Gavis
+          category={event.category}
+          action={event.action}
+          data={{ name: "han" }}
+        >
+          <Gavis
+            category="c2"
+            logOnMount
+            data={(data) => ({ ...data, lang: "ko" })}
+          >
+            <div>message</div>
+          </Gavis>
+        </Gavis>
+      );
+    }
+
+    render(
+      <GavisConfig logger={logger}>
+        <Page />
+      </GavisConfig>
+    );
+
+    // mount
+    await screen.findByText("message");
+
+    expect(logger).toBeCalledWith({
+      category: "c2",
+      action: "a",
+      data: { name: "han", lang: "ko" },
+    });
+    expect(logger).toBeCalledTimes(1);
+  });
 });

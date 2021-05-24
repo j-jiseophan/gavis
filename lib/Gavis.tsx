@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import { GavisContext } from "./context";
-import { GavisProps, GavisEvent } from "./types";
+import { GavisProps, GavisEvent, DataObject } from "./types";
 
 const Gavis = ({
   category,
@@ -12,15 +12,17 @@ const Gavis = ({
 }: GavisProps): JSX.Element => {
   const { logger, event } = useContext(GavisContext);
 
-  const shadowedEvent = useMemo(
-    () => ({
+  const shadowedEvent = useMemo(() => {
+    const shadowedData =
+      typeof data === "function" ? data(event.data ?? {}) : data ?? event.data;
+
+    return {
       category: category ?? event.category,
       action: action ?? event.action,
       label: label ?? event.label,
-      data: data ?? event.data,
-    }),
-    [category, action, label, data, event]
-  );
+      data: shadowedData,
+    };
+  }, [category, action, label, data, event]);
 
   useEffect(() => {
     if (!logOnMount) {
