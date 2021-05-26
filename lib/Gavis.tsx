@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import { GavisContext } from "./context";
-import { GavisProps, GavisEvent } from "./types";
+import { GavisProps } from "./types";
 import { getShadowedEvent } from "./utils";
 
 const Gavis = ({
@@ -27,7 +27,7 @@ const Gavis = ({
     if (shadowedEvent.action === undefined) {
       throw "action is not defined";
     }
-    logger(shadowedEvent as GavisEvent);
+    logger(shadowedEvent);
   }, [shadowedEvent, logger, logOnMount]);
 
   return (

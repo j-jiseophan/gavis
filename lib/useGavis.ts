@@ -7,7 +7,7 @@ const useGavis = (): Log => {
   const { logger, event } = useContext(GavisContext);
 
   const log = useCallback(
-    ({ category, action, label, data }: Partial<LogEvent>) => {
+    ({ category, action, label, data }: LogEvent) => {
       const shadowedEvent = getShadowedEvent(
         event,
         category,

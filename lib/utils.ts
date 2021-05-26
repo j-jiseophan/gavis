@@ -1,12 +1,12 @@
-import { Data, GavisEvent } from "./types";
+import { ContextEvent, Data, RequestEvent } from "./types";
 
 export const getShadowedEvent = (
-  inheritedEvent: Partial<GavisEvent>,
+  inheritedEvent: ContextEvent,
   category?: string,
   action?: string,
   label?: string,
   data?: Data
-): GavisEvent => {
+): RequestEvent => {
   const shadowedData =
     typeof data === "function"
       ? data(inheritedEvent.data ?? {})
@@ -19,5 +19,5 @@ export const getShadowedEvent = (
     data: shadowedData,
   };
 
-  return shadowedEvent as GavisEvent;
+  return shadowedEvent as RequestEvent;
 };
