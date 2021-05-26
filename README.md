@@ -4,6 +4,8 @@
 
 Declarative analytics logging library for React
 
+See [Doc](https://jshan2017.gitbook.io/gavis/).
+
 ## Installation
 
 ```bash
