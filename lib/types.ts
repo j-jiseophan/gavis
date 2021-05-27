@@ -24,6 +24,7 @@ export interface GavisProps extends LogEvent {
 export interface GavisElementProps extends GavisProps {
   type: keyof ReactHTML;
   className?: string;
+  logOnFirstObserve?: boolean;
 }
 
 export type Logger = (event: RequestEvent) => void;
