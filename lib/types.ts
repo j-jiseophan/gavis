@@ -1,3 +1,5 @@
+import { ReactHTML, ReactText } from "react";
+
 export interface RequestEvent {
   category: string;
   action: string;
@@ -15,8 +17,13 @@ export interface LogEvent {
 }
 
 export interface GavisProps extends LogEvent {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | ReactText;
   logOnMount?: boolean;
+}
+
+export interface GavisElementProps extends GavisProps {
+  type: keyof ReactHTML;
+  className?: string;
 }
 
 export type Logger = (event: RequestEvent) => void;
