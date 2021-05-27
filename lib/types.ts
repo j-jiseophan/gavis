@@ -14,12 +14,8 @@ export interface LogEvent {
   data?: Data;
 }
 
-export interface GavisProps {
+export interface GavisProps extends LogEvent {
   children: JSX.Element | JSX.Element[];
-  category?: string;
-  action?: string;
-  label?: string;
-  data?: Data;
   logOnMount?: boolean;
 }
 
