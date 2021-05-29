@@ -16,6 +16,10 @@ export interface LogEvent {
   data?: Data;
 }
 
+export interface HistoryEvent extends RequestEvent {
+  id: string;
+}
+
 export interface GavisProps extends LogEvent {
   children: ReactNode;
   logOnMount?: boolean;
@@ -43,4 +47,5 @@ export interface GavisContextValue {
 export interface GavisConfigProps {
   children?: ReactNode;
   logger: Logger;
+  debug?: boolean;
 }

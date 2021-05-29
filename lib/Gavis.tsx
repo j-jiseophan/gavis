@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from "react";
+import React, { useCallback, useContext, useMemo } from "react";
 import { GavisContext } from "./context";
 import { GavisProps } from "./types";
 import useEffectOnce from "./useEffectOnce";
