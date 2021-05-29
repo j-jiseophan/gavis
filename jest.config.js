@@ -3,4 +3,8 @@ module.exports = {
   testRegex: "/tests/.*\\.test\\.tsx$",
   modulePathIgnorePatterns: ["<rootDir>/examples/"],
   setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
+
+  moduleNameMapper: {
+    "\\.(css|less|scss)$": "identity-obj-proxy",
+  },
 };
