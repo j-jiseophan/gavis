@@ -19,7 +19,7 @@ const GavisDebugger = (): JSX.Element => {
     const historyElem = document.querySelector(".gavis-debugger-history");
     document
       .querySelector(".gavis-debugger-history")
-      ?.scrollTo(0, historyElem?.scrollHeight ?? 0);
+      ?.scrollTo?.(0, historyElem?.scrollHeight ?? 0);
   }, [ticks]);
 
   return (

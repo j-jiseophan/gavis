@@ -83,7 +83,7 @@ describe("GavisDebugger", () => {
     fireEvent.click(message);
 
     expect(logHistory.values.length).toBe(2);
-    await screen.findByText(JSON.stringify(event));
-    await screen.findByText(JSON.stringify({ ...event, action: "click" }));
+    await screen.findByText(`: ${event.action}`);
+    await screen.findByText(`: click`);
   });
 });
