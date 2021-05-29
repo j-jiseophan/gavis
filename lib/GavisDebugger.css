@@ -31,6 +31,10 @@
   padding: 10px;
 }
 
+.gavis-debugger .gavis-debugger-item.last {
+  background-color: aquamarine;
+}
+
 .gavis-debugger .gavis-debugger-item > li {
   margin-bottom: 4px;
   overflow-wrap: break-word;

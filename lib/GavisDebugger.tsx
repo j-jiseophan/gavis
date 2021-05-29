@@ -29,24 +29,30 @@ const GavisDebugger = (): JSX.Element => {
         <button onClick={logHistory.clear}>Clear</button>
       </div>
       <div className="gavis-debugger-history">
-        {logHistory.values.map(({ category, action, label, data, id }) => {
-          return (
-            <div key={id} className="gavis-debugger-item">
-              <li>
-                <b>Category</b>: {category}
-              </li>
-              <li>
-                <b>Action</b>: {action}
-              </li>
-              <li>
-                <b>Label</b>: {label}
-              </li>
-              <li>
-                <b>Data</b>: {data}
-              </li>
-            </div>
-          );
-        })}
+        {logHistory.values.map(
+          ({ category, action, label, data, id }, index) => {
+            const itemClassName =
+              index === logHistory.values.length - 1
+                ? "gavis-debugger-item last"
+                : "gavis-debugger-item";
+            return (
+              <div key={id} className={itemClassName}>
+                <li>
+                  <b>Category</b>: {category}
+                </li>
+                <li>
+                  <b>Action</b>: {action}
+                </li>
+                <li>
+                  <b>Label</b>: {label}
+                </li>
+                <li>
+                  <b>Data</b>: {data}
+                </li>
+              </div>
+            );
+          }
+        )}
       </div>
     </div>
   );
