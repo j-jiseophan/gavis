@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import { GavisContext } from "./context";
 import { GavisProps } from "./types";
 import { getShadowedEvent } from "./utils";
@@ -10,6 +10,7 @@ const Gavis = ({
   data,
   children,
   logOnMount,
+  logOnUnmount,
 }: GavisProps): JSX.Element => {
   const { logger, event } = useContext(GavisContext);
 
@@ -17,10 +18,7 @@ const Gavis = ({
     return getShadowedEvent(event, category, action, label, data);
   }, [category, action, label, data, event]);
 
-  useEffect(() => {
-    if (!logOnMount) {
-      return;
-    }
+  const log = useCallback(() => {
     if (shadowedEvent.category === undefined) {
       throw "category is not defined";
     }
@@ -28,7 +26,18 @@ const Gavis = ({
       throw "action is not defined";
     }
     logger(shadowedEvent);
-  }, [shadowedEvent, logger, logOnMount]);
+  }, [shadowedEvent, logger]);
+
+  useEffect(() => {
+    if (logOnMount) {
+      log();
+    }
+    if (logOnUnmount) {
+      return () => {
+        log();
+      };
+    }
+  }, [log, logOnMount, logOnUnmount]);
 
   return (
     <GavisContext.Provider value={{ logger, event: shadowedEvent }}>

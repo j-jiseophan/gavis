@@ -19,6 +19,7 @@ export interface LogEvent {
 export interface GavisProps extends LogEvent {
   children: JSX.Element | JSX.Element[] | ReactText;
   logOnMount?: boolean;
+  logOnUnmount?: boolean;
 }
 
 export interface GavisElementProps extends GavisProps {

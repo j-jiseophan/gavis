@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import React from "react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import React, { useState } from "react";
 
 import { Gavis, GavisConfig } from "../lib";
 
@@ -28,6 +28,39 @@ describe("Gavis", () => {
     // mount
     await screen.findByText("message");
 
+    expect(logger).toBeCalledWith(event);
+    expect(logger).toBeCalledTimes(1);
+  });
+
+  it("should log unmount event", async () => {
+    const logger = jest.fn();
+
+    function Page() {
+      const [show, setShow] = useState(true);
+
+      if (!show) {
+        return null;
+      }
+
+      return (
+        <Gavis category={event.category} action={event.action} logOnUnmount>
+          <div onClick={() => setShow(false)}>message</div>
+        </Gavis>
+      );
+    }
+
+    render(
+      <GavisConfig logger={logger}>
+        <Page />
+      </GavisConfig>
+    );
+
+    // mount
+    const message = await screen.findByText("message");
+
+    fireEvent.click(message);
+
+    expect(screen.queryByText("message")).toBeNull();
     expect(logger).toBeCalledWith(event);
     expect(logger).toBeCalledTimes(1);
   });
