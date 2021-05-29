@@ -1,0 +1,31 @@
+.gavis-debugger {
+  width: 20vw;
+  height: 100vh;
+  position: fixed;
+  overflow-y: scroll;
+  top: 0;
+  right: 0;
+  border: 1px solid black;
+}
+
+.gavis-debugger .gavis-debugger-title {
+  border-bottom: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.gavis-debugger .gavis-debugger-buttons {
+  border-bottom: 1px solid black;
+  padding: 10px;
+}
+
+.gavis-debugger .gavis-debugger-item {
+  border-bottom: 1px solid black;
+  padding: 10px;
+}
+
+.gavis-debugger .gavis-debugger-item > li {
+  margin-bottom: 4px;
+  overflow-wrap: break-word;
+}
