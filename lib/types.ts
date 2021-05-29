@@ -1,4 +1,4 @@
-import { ReactHTML, ReactText } from "react";
+import { ReactHTML, ReactNode } from "react";
 
 export interface RequestEvent {
   category: string;
@@ -17,7 +17,7 @@ export interface LogEvent {
 }
 
 export interface GavisProps extends LogEvent {
-  children: JSX.Element | JSX.Element[] | ReactText;
+  children: ReactNode;
   logOnMount?: boolean;
   logOnUnmount?: boolean;
 }
@@ -41,6 +41,6 @@ export interface GavisContextValue {
 }
 
 export interface GavisConfigProps {
-  children?: JSX.Element | JSX.Element[];
+  children?: ReactNode;
   logger: Logger;
 }
