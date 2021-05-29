@@ -1,6 +1,6 @@
 {
   "name": "gavis",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Declarative logging library for React",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
