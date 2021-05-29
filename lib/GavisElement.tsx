@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { GavisContext } from "./context";
 import Gavis from "./Gavis";
@@ -11,6 +11,7 @@ const GavisElement = ({
   className,
   logOnMount,
   logOnFirstObserve,
+  logOnClick,
   category,
   action,
   label,
@@ -23,10 +24,7 @@ const GavisElement = ({
     return getShadowedEvent(event, category, action, label, data);
   }, [category, action, label, data, event]);
 
-  useEffect(() => {
-    if (!inView || !logOnFirstObserve) {
-      return;
-    }
+  const log = useCallback(() => {
     if (shadowedEvent.category === undefined) {
       throw "category is not defined";
     }
@@ -34,11 +32,22 @@ const GavisElement = ({
       throw "action is not defined";
     }
     logger(shadowedEvent);
-  }, [inView, logger, logOnFirstObserve, shadowedEvent]);
+  }, [shadowedEvent, logger]);
+
+  useEffect(() => {
+    if (!inView || !logOnFirstObserve) {
+      return;
+    }
+    log();
+  }, [inView, log, logOnFirstObserve]);
 
   return React.createElement(
     type,
-    { ref, ...(className && { className }) },
+    {
+      ref,
+      ...(className && { className }),
+      ...(logOnClick && { onClick: log }),
+    },
     <Gavis
       category={category}
       action={action}
