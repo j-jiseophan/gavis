@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import { GavisContext } from "./context";
 import { GavisProps } from "./types";
+import useEffectOnce from "./useEffectOnce";
 import { getShadowedEvent } from "./utils";
 
 const Gavis = ({
@@ -28,7 +29,7 @@ const Gavis = ({
     logger(shadowedEvent);
   }, [shadowedEvent, logger]);
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (logOnMount) {
       log();
     }
@@ -37,7 +38,7 @@ const Gavis = ({
         log();
       };
     }
-  }, [log, logOnMount, logOnUnmount]);
+  });
 
   return (
     <GavisContext.Provider value={{ logger, event: shadowedEvent }}>
