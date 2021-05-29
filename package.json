@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "deploy": "yarn  build && yarn publish"
+    "deploy": "yarn  build && yarn publish",
+    "playground": "cd playground && yarn dev"
   },
   "author": "Jiseop Han <jshan2017@gmail.com>",
   "license": "MIT",
@@ -33,6 +34,7 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
+    "concurrently": "^6.2.0",
     "react-intersection-observer": "^8.32.0"
   },
   "peerDependencies": {
