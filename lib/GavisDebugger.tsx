@@ -52,7 +52,7 @@ const GavisDebugger = (): JSX.Element => {
                   <b>Label</b>: {label}
                 </li>
                 <li>
-                  <b>Data</b>: {data}
+                  <b>Data</b>: {JSON.stringify(data)}
                 </li>
               </div>
             );
