@@ -1,6 +1,6 @@
 {
   "name": "gavis",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Declarative logging library for React",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "concurrently": "^6.2.0",
+    "dequal": "^2.0.2",
     "react-intersection-observer": "^8.32.0"
   },
   "peerDependencies": {
