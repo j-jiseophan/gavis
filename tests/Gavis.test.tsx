@@ -44,7 +44,78 @@ describe("Gavis", () => {
 
       return (
         <Gavis category={event.category} action={event.action} logOnUnmount>
-          <div onClick={() => setShow(false)}>message</div>
+          <div onClick={() => setShow(false)}>unmount</div>
+        </Gavis>
+      );
+    }
+
+    render(
+      <GavisConfig logger={logger}>
+        <Page />
+      </GavisConfig>
+    );
+
+    // mount
+    const unmount = await screen.findByText("unmount");
+
+    fireEvent.click(unmount);
+
+    expect(screen.queryByText("unmount")).toBeNull();
+    expect(logger).toBeCalledWith(event);
+    expect(logger).toBeCalledTimes(1);
+  });
+
+  it("should log on category update", async () => {
+    const logger = jest.fn();
+
+    function Page() {
+      const [category, setCategory] = useState("c");
+
+      return (
+        <Gavis category={category} action={event.action} logOnUpdate>
+          <div onClick={() => setCategory(`${category}${category}`)}>
+            message
+          </div>
+        </Gavis>
+      );
+    }
+
+    render(
+      <GavisConfig logger={logger}>
+        <Page />
+      </GavisConfig>
+    );
+
+    // mount
+    const message = await screen.findByText("message");
+    fireEvent.click(message);
+    expect(logger).toBeCalledWith({ category: "cc", action: event.action });
+    expect(logger).toBeCalledTimes(1);
+  });
+
+  it("should log on mount, update, unmount", async () => {
+    const logger = jest.fn();
+
+    function Page() {
+      const [show, setShow] = useState(true);
+      const [category, setCategory] = useState("c");
+
+      if (!show) {
+        return null;
+      }
+
+      return (
+        <Gavis
+          category={category}
+          action={event.action}
+          logOnMount
+          logOnUpdate
+          logOnUnmount
+        >
+          <div onClick={() => setCategory(`${category}${category}`)}>
+            message
+          </div>
+          <div onClick={() => setShow(false)}>unmount</div>
         </Gavis>
       );
     }
@@ -58,11 +129,15 @@ describe("Gavis", () => {
     // mount
     const message = await screen.findByText("message");
 
+    expect(logger).toBeCalledWith({ category: "c", action: event.action });
     fireEvent.click(message);
+    expect(logger).toBeCalledWith({ category: "cc", action: event.action });
 
-    expect(screen.queryByText("message")).toBeNull();
-    expect(logger).toBeCalledWith(event);
-    expect(logger).toBeCalledTimes(1);
+    const unmount = screen.getByText("unmount");
+    fireEvent.click(unmount);
+    expect(screen.queryByText("unmount")).toBeNull();
+    expect(logger).toBeCalledWith({ category: "cc", action: event.action });
+    expect(logger).toBeCalledTimes(3);
   });
 
   it("should log shadowed event", async () => {

@@ -24,6 +24,7 @@ export interface GavisProps extends LogEvent {
   children: ReactNode;
   logOnMount?: boolean;
   logOnUnmount?: boolean;
+  logOnUpdate?: boolean;
 }
 
 export interface GavisElementProps extends GavisProps {
