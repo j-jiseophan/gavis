@@ -3,7 +3,7 @@ import { logHistory } from "./LogHistory";
 import "./GavisDebugger.css";
 
 const GavisDebugger = (): JSX.Element => {
-  const [ticks, setTicks] = useState(0);
+  const [, setTicks] = useState(0);
   const [showDebugger, setShowDebugger] = useState(true);
 
   useEffect(() => {
@@ -15,13 +15,6 @@ const GavisDebugger = (): JSX.Element => {
       clearInterval(intervalTimer);
     };
   }, []);
-
-  useEffect(() => {
-    const historyElem = document.querySelector(".gavis-debugger-history");
-    document
-      .querySelector(".gavis-debugger-history")
-      ?.scrollTo?.(0, historyElem?.scrollHeight ?? 0);
-  }, [ticks]);
 
   if (!showDebugger) {
     return (
