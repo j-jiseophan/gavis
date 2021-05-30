@@ -1,4 +1,5 @@
 import React from "react";
+import "../../lib/GavisDebugger.css";
 
 import { Gavis } from "../../lib";
 import Button from "./Button";

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { logHistory } from "./LogHistory";
-import "./GavisDebugger.css";
 
 const GavisDebugger = (): JSX.Element => {
   const [, setTicks] = useState(0);
