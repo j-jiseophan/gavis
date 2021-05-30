@@ -4,6 +4,7 @@ import "./GavisDebugger.css";
 
 const GavisDebugger = (): JSX.Element => {
   const [ticks, setTicks] = useState(0);
+  const [showDebugger, setShowDebugger] = useState(true);
 
   useEffect(() => {
     const intervalTimer = setInterval(
@@ -22,11 +23,23 @@ const GavisDebugger = (): JSX.Element => {
       ?.scrollTo?.(0, historyElem?.scrollHeight ?? 0);
   }, [ticks]);
 
+  if (!showDebugger) {
+    return (
+      <button
+        className="gavis-debugger-hidden"
+        onClick={() => setShowDebugger(true)}
+      >
+        Show Debugger
+      </button>
+    );
+  }
+
   return (
     <div className="gavis-debugger">
-      <div className="gavis-debugger-title">Recent logger requests</div>
+      <div className="gavis-debugger-title">Recent Gavis requests</div>
       <div className="gavis-debugger-buttons">
         <button onClick={logHistory.clear}>Clear</button>
+        <button onClick={() => setShowDebugger(false)}>Hide Debugger</button>
       </div>
       <div className="gavis-debugger-history">
         {logHistory.values.map(

@@ -7,13 +7,19 @@
   top: 0;
   right: 0;
   border: 1px solid black;
+  font-family: monospace;
+}
+
+.gavis-debugger button {
+  font-family: monospace !important;
 }
 
 .gavis-debugger .gavis-debugger-title {
   border-bottom: 1px solid black;
   padding: 10px;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .gavis-debugger .gavis-debugger-history {
@@ -24,6 +30,8 @@
 .gavis-debugger .gavis-debugger-buttons {
   border-bottom: 1px solid black;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .gavis-debugger .gavis-debugger-item {
@@ -38,4 +46,11 @@
 .gavis-debugger .gavis-debugger-item > li {
   margin-bottom: 4px;
   overflow-wrap: break-word;
+}
+
+.gavis-debugger-hidden {
+  position: fixed;
+  right: 11px;
+  top: 50px;
+  font-family: monospace !important;
 }
