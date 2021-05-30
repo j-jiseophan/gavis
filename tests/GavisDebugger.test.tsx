@@ -57,7 +57,7 @@ describe("GavisDebugger", () => {
     );
 
     // mount
-    await screen.findByText("Recent logger requests");
+    await screen.findByText("Recent Gavis requests");
   });
 
   it("should show recent two logs", async () => {
