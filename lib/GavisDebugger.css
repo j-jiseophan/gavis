@@ -1,5 +1,5 @@
 .gavis-debugger {
-  width: 20vw;
+  width: 300px;
   height: 100vh;
   position: fixed;
   display: flex;
@@ -8,6 +8,8 @@
   right: 0;
   border: 1px solid black;
   font-family: monospace;
+  z-index: 9999;
+  background-color: white;
 }
 
 .gavis-debugger button {
