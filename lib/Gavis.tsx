@@ -5,8 +5,10 @@ import React, {
   useMemo,
   useRef,
 } from "react";
+import { dequal } from "dequal";
+
 import { GavisContext } from "./context";
-import { GavisProps } from "./types";
+import { GavisProps, UpdateEvent } from "./types";
 import useEffectOnce from "./useEffectOnce";
 import { getShadowedEvent } from "./utils";
 
@@ -21,7 +23,7 @@ const Gavis = ({
   logOnUpdate,
 }: GavisProps): JSX.Element => {
   const { logger, event } = useContext(GavisContext);
-  const isFirstUpdate = useRef<boolean>(true);
+  const recentUpdateEvent = useRef<UpdateEvent | null>(null);
 
   const shadowedEvent = useMemo(() => {
     return getShadowedEvent(event, category, action, label, data);
@@ -52,12 +54,26 @@ const Gavis = ({
     if (!logOnUpdate) {
       return;
     }
-    if (isFirstUpdate.current === true) {
-      isFirstUpdate.current = false;
+    const newUpdateEvent = { category, action, label, data, event };
+    if (recentUpdateEvent.current === null) {
+      recentUpdateEvent.current = newUpdateEvent;
       return;
     }
+    if (dequal(newUpdateEvent, recentUpdateEvent.current)) {
+      return;
+    }
+    recentUpdateEvent.current = newUpdateEvent;
     log();
-  }, [logOnUpdate, log, isFirstUpdate]);
+  }, [
+    logOnUpdate,
+    log,
+    recentUpdateEvent,
+    category,
+    action,
+    label,
+    data,
+    event,
+  ]);
 
   return (
     <GavisContext.Provider value={{ logger, event: shadowedEvent }}>

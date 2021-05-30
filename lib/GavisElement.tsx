@@ -10,6 +10,7 @@ const GavisElement = ({
   children,
   className,
   logOnMount,
+  logOnUpdate,
   logOnUnmount,
   logOnFirstObserve,
   logOnClick,
@@ -55,6 +56,7 @@ const GavisElement = ({
       label={label}
       data={data}
       logOnMount={logOnMount}
+      logOnUpdate={logOnUpdate}
       logOnUnmount={logOnUnmount}
     >
       {children}

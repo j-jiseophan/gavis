@@ -27,6 +27,10 @@ export interface GavisProps extends LogEvent {
   logOnUpdate?: boolean;
 }
 
+export interface UpdateEvent extends LogEvent {
+  event: ContextEvent;
+}
+
 export interface GavisElementProps extends GavisProps {
   type: keyof ReactHTML;
   className?: string;

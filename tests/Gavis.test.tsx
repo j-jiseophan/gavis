@@ -140,6 +140,73 @@ describe("Gavis", () => {
     expect(logger).toBeCalledTimes(3);
   });
 
+  it("should deduplicate multiple updates but same event", async () => {
+    const logger = jest.fn();
+
+    function Page() {
+      const [category, setCategory] = useState("c");
+      const [, setTick] = useState(0);
+
+      return (
+        <Gavis category={category} action={event.action} logOnUpdate>
+          <div onClick={() => setCategory(`${category}${category}`)}>
+            message
+          </div>
+          <div onClick={() => setTick((tick) => tick + 1)}>update tick</div>
+        </Gavis>
+      );
+    }
+
+    render(
+      <GavisConfig logger={logger}>
+        <Page />
+      </GavisConfig>
+    );
+
+    // mount
+    const message = await screen.findByText("message");
+
+    fireEvent.click(message);
+    expect(logger).toBeCalledWith({ category: "cc", action: event.action });
+    expect(logger).toBeCalledTimes(1);
+
+    const tickUpdater = screen.getByText("update tick");
+    fireEvent.click(tickUpdater);
+    fireEvent.click(tickUpdater);
+    expect(logger).toBeCalledTimes(1);
+  });
+
+  it("should not deduplicate if prop changes", async () => {
+    const logger = jest.fn();
+
+    function Page() {
+      const [category, setCategory] = useState("c");
+      const [, setTick] = useState(0);
+
+      return (
+        <Gavis category={category} action={event.action} logOnUpdate>
+          <div onClick={() => setCategory(`${category}${category}`)}>
+            message
+          </div>
+          <div onClick={() => setTick((tick) => tick + 1)}>update tick</div>
+        </Gavis>
+      );
+    }
+
+    render(
+      <GavisConfig logger={logger}>
+        <Page />
+      </GavisConfig>
+    );
+
+    // mount
+    const message = await screen.findByText("message");
+
+    fireEvent.click(message);
+    fireEvent.click(message);
+    expect(logger).toBeCalledTimes(2);
+  });
+
   it("should log shadowed event", async () => {
     const logger = jest.fn();
 
