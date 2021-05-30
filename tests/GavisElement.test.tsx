@@ -37,7 +37,7 @@ describe("GavisElement", () => {
 
     expect(screen.getByText("message").className).toBe("ge");
   });
-  it("should log mount event", async () => {
+  it("should log on mount event", async () => {
     const logger = jest.fn();
 
     function Page() {
@@ -66,7 +66,7 @@ describe("GavisElement", () => {
     expect(logger).toBeCalledTimes(1);
   });
 
-  it("should log unmount event", async () => {
+  it("should log on unmount event", async () => {
     const logger = jest.fn();
 
     function Page() {
@@ -104,7 +104,7 @@ describe("GavisElement", () => {
     expect(logger).toBeCalledTimes(1);
   });
 
-  it("should log firstObserve event", async () => {
+  it("should log on firstObserve event", async () => {
     const logger = jest.fn();
 
     function Page() {
@@ -137,7 +137,7 @@ describe("GavisElement", () => {
     expect(logger).toBeCalledTimes(1);
   });
 
-  it("should log click event", async () => {
+  it("should log on click event", async () => {
     const logger = jest.fn();
 
     function Page() {

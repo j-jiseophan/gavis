@@ -8,7 +8,7 @@ describe("Gavis", () => {
     category: "c",
     action: "a",
   };
-  it("should log mount event", async () => {
+  it("should log on mount event", async () => {
     const logger = jest.fn();
 
     function Page() {
@@ -32,7 +32,7 @@ describe("Gavis", () => {
     expect(logger).toBeCalledTimes(1);
   });
 
-  it("should log unmount event", async () => {
+  it("should log on unmount event", async () => {
     const logger = jest.fn();
 
     function Page() {
