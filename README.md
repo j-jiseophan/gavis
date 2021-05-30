@@ -6,85 +6,59 @@ Declarative analytics logging library for React
 
 See [Docs](https://j-jiseophan.github.io/gavis-docs).
 
-## Installation
+# Introduction
 
-```bash
-npm i --save gavis
+`Gavis - A declarative analytics logging library for React`
+
+Writing code for analytics logging is so boring and stressful. I wanted not to spend much time on writing codes related to logging but to focus on the application itself.
+
+Gavis is an analytics logging library which helps you ..
+
+1. Send logs in declarative ways
+2. Get data needed for logging with less code
+3. Prevent sending duplicate logs for a single event
+4. Testing easily
+
+## Overview
+
+```jsx
+// without Gavis
+const Page = () => {
+  useEffect(() => {
+    sendLog({ category: "Post", action: "view" });
+  }, [sendLog]);
+
+  return <div>Hello World</div>;
+};
 ```
 
-or using yarn,
+Can be rewritten using Gavis :
+
+```jsx
+// with Gavis
+const Page = () => {
+  return (
+    <Gavis category="Post" action="view" logOnMount>
+      <div>Hello World</div>
+    </Gavis>
+  );
+};
+```
+
+## Installation
 
 ```bash
 yarn add gavis
 ```
 
-## Examples
+## Contributing
 
-```tsx
-//App.tsx
+You can test Gavis with `jest` or in the playground application.
 
-import { GavisConfig } from "gavis";
+```bash
+yarn test
+```
 
-const logger = (category: string, action: string, label: string, data: any) => {
-  const value = data.viewCount;
-  ga(category, action, label, value);
-};
-
-function App() {
-  return (
-    <GavisConfig logger={logger}>
-      <Page />
-    </GavisConfig>
-  );
-}
-
-//Page.tsx
-
-import { Gavis } from "gavis";
-
-/*
-  - Create a log event context with <Gavis/> .
-  - If 'logOnMount' is true, event
-    {cateogry: "News", action:"expose", label:"morning",
-      data: { viewCount, commentCount }} is sent on mount
-*/
-
-function Page() {
-  return (
-    <div>
-      <p>hello world</p>
-
-      <Gavis
-        category="News"
-        action="expose"
-        label="morning"
-        data={{ viewCount, commentCount }}
-        logOnMount
-      >
-        <div>message</div>
-        <Button />
-      </Gavis>
-    </div>
-  );
-}
-
-// Button.tsx
-
-import { useGavis } from "gavis";
-
-/*
-  - The event context can be overriden
-    by child <Gavis/> or 'log' function
-  - Event {cateogry: "News", action:"click", label:"evening",
-            data: { viewCount, commentCount }} is sent on click
-*/
-
-function Button() {
-  const log = useGavis();
-  return (
-    <Gavis label="evening">
-      <button onClick={() => log({ action: "click" })}>LOG</button>;
-    </Gavis>
-  );
-}
+```bash
+yarn playground
 ```
